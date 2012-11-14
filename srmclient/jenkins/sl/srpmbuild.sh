@@ -56,16 +56,21 @@ cd RPMS/x86_64
 
 case "$osMajorRel" in
   5)  rpm2cpio dcache-srmclient-${TAG}-${age}.x86_64.rpm | cpio -id;
+      if [`rpmlint dcache-srmclient-${TAG}-${age}.x86_64.rpm | grep world-writable`]
+        then
+          exit 1;
+      fi
     ;;
   6)  rpm2cpio dcache-srmclient-${TAG}-${age}.el6.x86_64.rpm | cpio -id;
+      if [`rpmlint dcache-srmclient-${TAG}-${age}.el6.x86_64.rpm | grep world-writable`]
+        then
+          exit 1;
+      fi
     ;;
   *)  echo "Unknown operating system"
     ;;
 esac
 
 tar cjf dcache-srmclient-${TAG}-${age}.x86_64.tar.gz usr; 
-
-if [`rpmlint dcache-srmclient-${TAG}-${age}.x86_64.rpm | grep world-writable`]
-  exit 1;
 
 rm -rf usr
