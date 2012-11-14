@@ -64,4 +64,8 @@ case "$osMajorRel" in
 esac
 
 tar cjf dcache-srmclient-${TAG}-${age}.x86_64.tar.gz usr; 
+
+if [`rpmlint dcache-srmclient-${TAG}-${age}.x86_64.rpm | grep world-writable`]
+  exit 1;
+
 rm -rf usr
