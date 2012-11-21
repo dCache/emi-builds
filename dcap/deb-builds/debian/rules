@@ -1,0 +1,137 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+-include /usr/share/dpkg/buildflags.mk
+
+INSTALLDIR = $(CURDIR)/debian/tmp
+
+_prefix = /usr
+_bindir = $(_prefix)/bin
+_sbindir = $(_prefix)/sbin
+_libdir = $(_prefix)/lib
+_includedir = $(_prefix)/include
+_sysconfdir = /etc
+_localstatedir = /var
+_datadir = $(_prefix)/share
+_mandir = $(_datadir)/man
+_docdir = $(_datadir)/doc
+
+version=2.47.6
+tagvers=$(version)-1
+
+configure: configure-stamp
+	:
+
+configure-stamp:
+	dh_testdir
+
+	chmod +x bootstrap.sh
+	./bootstrap.sh
+
+	CFLAGS="$(CFLAGS)" \
+	LDFLAGS="$(LDFLAGS) -Wl,-z,defs" \
+	./configure \
+		--prefix=/usr \
+		--with-globus-include="$(_includedir)/globus -I$(_libdir)/globus/include" \
+		--with-globus-lib=/dummy \
+		--with-tunneldir=$(_libdir)/dcap
+
+	touch $@
+
+build: build-indep build-arch
+	:
+
+build-indep: build-stamp
+	:
+
+build-arch: build-stamp
+	:
+
+build-stamp: configure-stamp
+	dh_testdir
+
+	$(MAKE)
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+
+	if [ -r Makefile ] ; then $(MAKE) clean && $(MAKE) distclean ; fi
+
+	rm -rf config
+	rm -f aclocal.m4
+	rm -f configure
+	rm -f Makefile.in
+	rm -f src/debug_level.h.in
+	rm -f src/Makefile.in
+	rm -f plugins/Makefile.in
+	rm -f plugins/*/Makefile.in
+
+	rm -f build-stamp configure-stamp
+
+	dh_clean
+
+install: build-stamp
+	dh_testdir
+	dh_testroot
+	#dh_clean -k 
+	dh_prep
+
+	$(MAKE) install DESTDIR=$(INSTALLDIR)
+
+	rm $(INSTALLDIR)$(_libdir)/dcap/*.a
+	rm $(INSTALLDIR)$(_libdir)/dcap/*.la
+
+	rm $(INSTALLDIR)$(_libdir)/*.la
+
+	rm -rf $(INSTALLDIR)$(_datadir)/doc
+
+binary-indep:
+	:
+
+binary-arch: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+	dh_installexamples
+	dh_install --fail-missing
+	dh_installman
+	dh_link
+	dh_strip --dbg-package=dcap-dbg
+	dh_compress
+	dh_fixperms
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps -l debian/libdcap1/usr/lib
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+	:
+
+get-orig-source:
+	if [ -r ../dcap_$(version).orig.tar.gz ] ; then \
+	  echo "dcap_$(version).orig.tar.gz already exists." ; \
+	else \
+	  if [ -d "dcap-$(version)" ]; then \
+	    echo "Please remove existing directory 'dcap-$(version)'" ; \
+	    exit -1 ; \
+	  fi ; \
+	  echo "Fetching upstream svn version" ; \
+	  svn export http://svn.dcache.org/dCache/tags/dcap-$(tagvers) \
+	    dcap-$(version) ; \
+	  echo "Removing some windows sources due to different licensing" ; \
+	  rm dcap-$(version)/src/dcap_unix2win.c ; \
+	  echo "Removing java base 64 sources due to different licensing" ; \
+	  rm dcap-$(version)/plugins/javatunnel/Base64.java ; \
+	  echo "Packing it up." ; \
+	  tar -z -c -f ../dcap_$(version).orig.tar.gz dcap-$(version) ; \
+	  echo "Cleaning up." ; \
+	  rm -rf dcap-$(version) ; \
+	fi
+
+.PHONY: build-indep build-arch build clean binary-indep binary-arch binary install configure get-orig-source

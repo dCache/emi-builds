@@ -1,0 +1,70 @@
+Source: dcap
+Priority: optional
+Maintainer: Mattias Ellert <mattias.ellert@fysast.uu.se>
+Build-Depends: debhelper (>= 5), libglobus-gssapi-gsi-dev, libkrb5-dev, libssl-dev, autoconf, automake, libtool
+Standards-Version: 3.9.2
+Section: libs
+DM-Upload-Allowed: yes
+Vcs-Browser: http://svn.nordugrid.org/trac/packaging/browser/debian/dcap
+Vcs-Svn: http://svn.nordugrid.org/repos/packaging/debian/dcap
+Homepage: http://www.dcache.org/manuals/libdcap.shtml
+
+Package: dcap
+Section: net
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Client Tools for dCache
+ dCache is a distributed mass storage system.
+ This package contains the client tools.
+
+Package: libdcap1
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: dcap-tunnel-gsi (= ${binary:Version}), dcap-tunnel-krb (= ${binary:Version}), dcap-tunnel-ssl (= ${binary:Version}), dcap-tunnel-telnet (= ${binary:Version})
+Description: Client Libraries for dCache
+ dCache is a distributed mass storage system.
+ This package contains the client libraries.
+
+Package: dcap-dev
+Section: libdevel
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${misc:Depends}
+Description: Client Development Files for dCache
+ dCache is a distributed mass storage system.
+ This package contains the client development files.
+
+Package: dcap-tunnel-gsi
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: GSI tunnel for dCache
+ This package contains the gsi tunnel plugin library used by dcap.
+ This library is dynamically loaded at runtime.
+
+Package: dcap-tunnel-krb
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Kerberos tunnel for dCache
+ This package contains the kerberos tunnel plugin library used by dcap.
+ This library is dynamically loaded at runtime.
+
+Package: dcap-tunnel-ssl
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: SSL tunnel for dCache
+ This package contains the ssl tunnel plugin library used by dcap.
+ This library is dynamically loaded at runtime.
+
+Package: dcap-tunnel-telnet
+Architecture: any
+Depends: libdcap1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Telnet tunnel for dCache
+ This package contains the telnet tunnel plugin library used by dcap.
+ This library is dynamically loaded at runtime.
+
+Package: dcap-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: dcap (= ${binary:Version}) | libdcap1 (= ${binary:Version}) | dcap-tunnel-gsi (= ${binary:Version}) | dcap-tunnel-krb (= ${binary:Version}) | dcap-tunnel-ssl (= ${binary:Version}) | dcap-tunnel-telnet (= ${binary:Version}), ${misc:Depends}
+Description: Debug symbols for dcap
+ This package contains debug symbols for dcap.

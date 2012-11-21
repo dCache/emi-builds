@@ -1,0 +1,8 @@
+The source is checked out from svn. See the get-orig-source rule in the
+debian/rules file for details.
+
+The following files were removed from the svn checkout since they have
+different copyright and/or license than the rest of the sources and
+are not used during compilation:
+ - src/dcap_unix2win.c
+ - plugins/javatunnel/Base64.java

@@ -1,0 +1,17 @@
+# Allow loading of plugins outside of the default library search path
+# http://rb.dcache.org/r/3765
+dcap-dlopen.patch
+
+# Reduce overlinking
+# http://rb.dcache.org/r/1646
+dcap-libs.patch.2.47.6
+
+## patch already applied in 2.47.6
+# Fix strict aliasing warnings
+# http://rb.dcache.org/r/2632
+#dcap-aliasing.patch
+
+## patch already applied in 2.47.6
+# Don't install test binaries
+# http://rb.dcache.org/r/3393
+#dcap-no-testinstall.patch

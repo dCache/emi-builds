@@ -1,0 +1,94 @@
+diff -ur dcap-2.47.5.orig/configure.ac dcap-2.47.5/configure.ac
+--- dcap-2.47.5.orig/configure.ac	2010-10-28 17:20:48.000000000 +0200
++++ dcap-2.47.5/configure.ac	2011-09-30 10:34:24.687030563 +0200
+@@ -876,6 +876,16 @@
+ AC_SUBST(GLOBUS_INCLUDE_DIR)
+ AC_SUBST(GLOBUS_LIB_DIR)
+ 
++TUNNELLIBDIR="$libdir"
++AC_ARG_WITH(tunneldir,
++[ --with-tunneldir[[=DIR]] where to install dcap plugins],[
++if test "X${withval}" != "X" ; then
++TUNNELLIBDIR="$withval"
++fi
++])
++
++AC_DEFINE_UNQUOTED(TUNNELLIBDIR, "$TUNNELLIBDIR", [where to install dcap plugins])
++AC_SUBST(TUNNELLIBDIR)
+ 
+ AC_OUTPUT(Makefile \
+   src/Makefile \
+Endast i dcap-2.47.5: configure.ac~
+diff -ur dcap-2.47.5.orig/plugins/gssapi/Makefile.am dcap-2.47.5/plugins/gssapi/Makefile.am
+--- dcap-2.47.5.orig/plugins/gssapi/Makefile.am	2010-02-09 14:34:19.000000000 +0100
++++ dcap-2.47.5/plugins/gssapi/Makefile.am	2011-09-30 09:14:07.488647699 +0200
+@@ -5,12 +5,13 @@
+ AM_CFLAGS=$(CWFLAG) \
+ 	-D_REENTRANT -DLIBC_SYSCALLS -D_GNU_SOURCE
+ 
+-lib_LTLIBRARIES =
++tunnellibdir = $(TUNNELLIBDIR)
++tunnellib_LTLIBRARIES =
+ if WANT_LIBGSITUNNEL
+-lib_LTLIBRARIES += libgsiTunnel.la
++tunnellib_LTLIBRARIES += libgsiTunnel.la
+ endif
+ if WANT_LIBGSSTUNNEL
+-lib_LTLIBRARIES += libgssTunnel.la
++tunnellib_LTLIBRARIES += libgssTunnel.la
+ endif
+ 
+ libgsiTunnel_la_SOURCES = $(c_sources)  $(h_sources)
+diff -ur dcap-2.47.5.orig/plugins/ssl/Makefile.am dcap-2.47.5/plugins/ssl/Makefile.am
+--- dcap-2.47.5.orig/plugins/ssl/Makefile.am	2010-03-24 12:32:03.000000000 +0100
++++ dcap-2.47.5/plugins/ssl/Makefile.am	2011-09-30 09:14:21.681465099 +0200
+@@ -4,7 +4,8 @@
+ AM_CFLAGS=$(CWFLAG) \
+ 	-D_REENTRANT -DLIBC_SYSCALLS -D_GNU_SOURCE
+ 
+-lib_LTLIBRARIES = libsslTunnel.la
++tunnellibdir = $(TUNNELLIBDIR)
++tunnellib_LTLIBRARIES = libsslTunnel.la
+ 
+ libsslTunnel_la_SOURCES = $(c_sources)  $(h_sources)
+ libsslTunnel_la_LIBADD = $(SSL_LIBS)
+diff -ur dcap-2.47.5.orig/plugins/telnet/Makefile.am dcap-2.47.5/plugins/telnet/Makefile.am
+--- dcap-2.47.5.orig/plugins/telnet/Makefile.am	2010-02-09 14:34:19.000000000 +0100
++++ dcap-2.47.5/plugins/telnet/Makefile.am	2011-09-30 09:14:35.058292998 +0200
+@@ -7,7 +7,8 @@
+ AM_CFLAGS= $(CWFLAG) \
+ 	-D_REENTRANT -DLIBC_SYSCALLS -D_GNU_SOURCE
+ 
+-lib_LTLIBRARIES = libtelnetTunnel.la
++tunnellibdir = $(TUNNELLIBDIR)
++tunnellib_LTLIBRARIES = libtelnetTunnel.la
+ 
+ libtelnetTunnel_la_SOURCES = $(c_sources)  $(h_sources)
+ libtelnetTunnel_la_LIBADD = -lcrypt
+diff -ur dcap-2.47.5.orig/src/tunnelManager.c dcap-2.47.5/src/tunnelManager.c
+--- dcap-2.47.5.orig/src/tunnelManager.c	2010-09-20 16:28:23.000000000 +0200
++++ dcap-2.47.5/src/tunnelManager.c	2011-09-30 09:13:46.658915680 +0200
+@@ -87,6 +87,7 @@
+ {
+ 	void *handle;
+ 	ioTunnel *tunnel;
++	char *fullpath;
+ 
+ 	if(libname == NULL) {
+ 		dc_debug(DC_ERROR, "Bad tunnel name");
+@@ -100,6 +101,15 @@
+ 
+ 	handle = dlopen( libname, RTLD_NOW);
+ 		
++	if(handle == NULL) {
++		fullpath = malloc(strlen(TUNNELLIBDIR) + strlen(libname) + 2);
++		strcpy(fullpath, TUNNELLIBDIR);
++		strcat(fullpath, "/");
++		strcat(fullpath, libname);
++		handle = dlopen(fullpath, RTLD_NOW);
++		free(fullpath);
++	}
++
+ 	if(handle == NULL) {		
+ 		goto fail;
+ 	}

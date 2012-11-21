@@ -1,0 +1,7 @@
+debian/tmp/usr/include/dc_hack.h
+debian/tmp/usr/include/dcap.h
+debian/tmp/usr/include/dcap_errno.h
+debian/tmp/usr/lib/libdcap.a
+debian/tmp/usr/lib/libdcap.so
+debian/tmp/usr/lib/libpdcap.a
+debian/tmp/usr/lib/libpdcap.so
