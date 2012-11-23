@@ -11,11 +11,11 @@ Vcs-Browser: http://svn.nordugrid.org/trac/packaging/browser/debian/dcap
 Vcs-Svn: http://svn.nordugrid.org/repos/packaging/debian/dcap
 Build-Depends: debhelper (>= 5), libglobus-gssapi-gsi-dev, libkrb5-dev, libssl-dev, autoconf, automake, libtool
 Checksums-Sha1: 
- dff3d8b410b2195c2d0d58a82247e37402e72ef4 417286 dcap_2.47.7.orig.tar.gz
- a430d8c9840e35f943fbdb2251df276c1508e9d8 6099 dcap_2.47.7-1.debian.tar.gz
+ d1ab01e1215ded7134e0fc2f0081b88816f9a2d7 206277 dcap_2.47.7.orig.tar.gz
+ 4a188cd2c2ce0dfbc47d876e82eceb626ad0f22b 6084 dcap_2.47.7-1.debian.tar.gz
 Checksums-Sha256: 
- 8be27bf7bfb16081f143fefe60b1364ff3d0f91c62bd9694b2c7f234cedafa5a 417286 dcap_2.47.7.orig.tar.gz
- e2c3e54bf8e89611b12e0c4a3b33b12d67a1e2ac2f8558b34e8485eef9c2cd9e 6099 dcap_2.47.7-1.debian.tar.gz
+ 2aa1d34076b7afc5b7d3294f8275356a47b7fb2484440e8f6aa5942eb121f4a5 206277 dcap_2.47.7.orig.tar.gz
+ b7bee18b34a00725d104976e2036587ce958e5a87a29e078499361b444602c73 6084 dcap_2.47.7-1.debian.tar.gz
 Files: 
- 05138e93e719c35e23aceb09bf14629a 417286 dcap_2.47.7.orig.tar.gz
- f483955ccb48834bd321bcb3c13ade62 6099 dcap_2.47.7-1.debian.tar.gz
+ 63388e3824d9de9efae40e83a960fabc 206277 dcap_2.47.7.orig.tar.gz
+ c0c68dc68876ad697325859d3bd083dd 6084 dcap_2.47.7-1.debian.tar.gz
