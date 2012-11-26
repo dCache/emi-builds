@@ -1,0 +1,40 @@
+Verbosity levels from gridmonsam/probe.py
+
+  OK       - all is OK
+  WARNING  - 
+           * a problem on client side
+           * "perfomance data" warning - eg.: host cert will expire soon
+  CRITICAL - problem on server side
+  UNKNOWN  - problem with probe/metrics/UI intself
+  
+  0 Single line, minimal output. Summary. No details data.
+  verbosity = 0
+  metricsStatus summaryData               detailsData
+  0 - OK        OK: summary               -
+  1 - WARNING   WARNING: summary          -
+  2 - CRITICAL  CRITICAL: summary         -
+  3 - UNKNONWN  metric internal error msg -
+  
+  1 Multi line, additional information.
+  verbosity = 1
+  metricsStatus summaryData               detailsData
+  0 - OK        OK: summary               OK: summary
+  1 - WARNING   WARNING: summary          WARNING: summary\n cmd+stderr
+  2 - CRITICAL  CRITICAL: summary         CRITICAL: summary\n cmd+stderr
+  3 - UNKNONWN  metric internal error msg metric internal error msg
+  
+  2 Multi line, configuration debug output
+  verbosity = 2
+  metricsStatus summaryData                        detailsData
+  0 - OK        OK: summary                        OK: summary\n stdout[+stderr]
+  1 - WARNING   WARNING: summary+stderr w/o '\n'   WARNING: summary\n cmd+stdout+stderr
+  2 - CRITICAL  CRITICAL: summary+stderr w/o '\n'  CRITICAL: summary\n cmd+stdout+stderr
+  3 - UNKNONWN  metric internal error msg          metric internal error msg 
+  
+  3 Lots of detail for plugin problem diagnosis
+  verbosity = 3
+  metricsStatus summaryData                       detailsData
+  0 - OK        OK: summary                       OK: summary\n config+cmd+stdout[+stderr]
+  1 - WARNING   WARNING: summary+stderr w/o '\n'  WARNING: summary\n config+cmd+stdout+stderr
+  2 - CRITICAL  CRITICAL: summary+stderr w/o '\n' CRITICAL: summary\n config+cmd+stdout+stderr
+  3 - UNKNONWN  metric internal error msg         metric internal error msg 

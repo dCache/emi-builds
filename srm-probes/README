@@ -1,0 +1,15 @@
+Probes for (emi) Grid services. To be used with Nagios.
+
+Grid services covered:
+- SRM
+
+The code is written in Python and uses 'gridmon' Python package, which is
+provided by python-GridMon > v1.1.1 RPM.
+
+For documentation on probes/metrics please see the following resources.
+
+How to 
+ * invoke and configure for Nagios
+
+Christian Bernardt
+<Christian.Bernardt@desy.de>

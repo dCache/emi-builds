@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+##############################################################################
+#
+# NAME:        SRM-probe
+#
+# FACILITY:    SAM (Service Availability Monitoring)
+#
+# COPYRIGHT:
+#         Copyright (c) 2009, Members of the EGEE Collaboration.
+#         http://www.eu-egee.org/partners/
+#         Licensed under the Apache License, Version 2.0.
+#         http://www.apache.org/licenses/LICENSE-2.0
+#         This software is provided "as is", without warranties
+#         or conditions of any kind, either express or implied.
+#
+# DESCRIPTION:
+#
+#         SRM probe.
+#
+# AUTHORS:     Konstantin Skaburskas, CERN
+#
+# CREATED:     21-Nov-2008
+#
+# NOTES:
+#
+# MODIFIED:
+#    2009-12-07 : Konstantin Skaburskas
+#         - using 'gridmon' and 'gridmetrics' packages after merging 
+#           'gridmonsam' with 'gridmon'
+#         - metrics implementation class was moved into gridmetrics.srmmetrics
+##############################################################################
+
+"""
+SRM probe.
+
+SRM probe.
+
+Konstantin Skaburskas <konstantin.skaburskas@cern.ch>, CERN
+SAM (Service Availability Monitoring)
+"""
+
+import sys
+
+try:
+    from gridmon import probe
+    from gridmetrics.srmmetrics import SRMMetrics as SRM
+except ImportError,e:
+    summary = "UNKNOWN: Error loading modules : %s" % (e)
+    sys.stdout.write(summary+'\n')
+    sys.stdout.write(summary+'\nsys.path: %s\n'% str(sys.path))
+    sys.exit(3)    
+
+class SRMMetrics(SRM):
+    def __init__(self, tuples):
+        SRM.__init__(self, tuples, 'SRM')
+
+runner = probe.Runner(SRMMetrics, probe.ProbeFormatRenderer())
+sys.exit(runner.run(sys.argv))
