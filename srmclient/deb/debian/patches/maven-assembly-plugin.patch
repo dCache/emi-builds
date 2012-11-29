@@ -1,18 +1,7 @@
 Index: modules/srmclient/pom.xml
 ===================================================================
---- modules/srmclient/pom.xml	(revision 17816)
-+++ modules/srmclient/pom.xml	(working copy)
-@@ -8,6 +8,10 @@
-     <relativePath>../../pom.xml</relativePath>
-   </parent>
- 
-+  <properties>
-+    <fhs.outputDirectory>${project.build.directory}</fhs.outputDirectory>
-+  </properties>
-+
-   <artifactId>srmclient</artifactId>
-   <packaging>jar</packaging>
- 
+--- dcache-srmclient-2.2.4.orig/modules/srmclient/pom.xml
++++ dcache-srmclient-2.2.4/modules/srmclient/pom.xml 
 @@ -52,7 +56,7 @@
        <plugins>
            <plugin>
