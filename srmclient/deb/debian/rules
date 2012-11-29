@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_auto_install:
+	mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
+	mvn -B -am -pl modules/srmclient package -Dfhs.outputDirectory=./output  -Dmaven.repo.local=/tmp/.m2/localRepository -DskipTests
+	cp -rf  modules/srmclient/target/srmclient-2.2.4/* debian/dcache-srmclient/	
+
+override_dh_auto_clean:
+	mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
+
+override_dh_auto_build:
+	echo "Skip Autobuild"
+

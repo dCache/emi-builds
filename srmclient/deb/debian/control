@@ -1,0 +1,12 @@
+Source: dcache-srmclient
+Maintainer: Christian Bernardt <christian.bernardt@desy.de>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 8), maven2, openjdk-6-jdk
+
+Package: dcache-srmclient
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: dCache SRM Client
+ Client to access storage backends that are SRM conformant.
