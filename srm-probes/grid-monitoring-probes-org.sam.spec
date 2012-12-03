@@ -62,6 +62,8 @@ rm -rf %{rpm_install_dir}/gridmetrics
 %{rpm_install_dir}/SRM-probe
 %{rpm_install_dir}/setup.py
 %{rpm_install_dir}/gridmetrics
+%{pylib}/*.py*
+%{pylib}/jobmonit/*.py*
 
 %doc %{rpm_install_dir}/README
 %doc %{rpm_install_dir}/CHANGES
