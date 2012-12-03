@@ -2,6 +2,9 @@
 %define rpm_install_dir /usr/share/nagios/plugins/contrib/srm
 %define config_dir /usr/local/nagios/etc/objects/
 %define etcdir /etc/gridmon
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+%define pylib %{python_sitelib}/%{lpylib}
+
 
 Summary: EMI SRM nagios probes
 Name: emi.dcache.srm-probes
