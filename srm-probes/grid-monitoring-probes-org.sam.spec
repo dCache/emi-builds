@@ -41,7 +41,7 @@ cp ../README %{buildroot}%{rpm_install_dir}
 install --directory %{buildroot}%{pylib}
 install --mode 644 %{lpylib}/*.py* %{buildroot}%{pylib}
 %{__python} ../setup.py install_lib -O1 --skip-build --build-dir=%{lpylib} --install-dir=%{buildroot}%{pylib}
-find %{buildroot}%{rpm_install_dir} -regex ".*\.\(pyc\|pyo\)" -exec rm '{}' \;
+find %{buildroot} -regex ".*\.\(pyc\|pyo\)" -exec rm '{}' \;
 
 %post
 
@@ -56,7 +56,6 @@ rm -rf %{rpm_install_dir}/gridmetrics
 %{rpm_install_dir}/SRM-probe
 %{rpm_install_dir}/setup.py
 %{rpm_install_dir}/gridmetrics
-
 
 %doc %{rpm_install_dir}/README
 %doc %{rpm_install_dir}/CHANGES
