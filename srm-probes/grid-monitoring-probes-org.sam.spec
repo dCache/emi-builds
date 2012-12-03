@@ -31,7 +31,7 @@ SRM-probe packaged by dCache
 echo "Current Directory:" `pwd`
 echo "Creating BUILDROOT DIR" %{buildroot}%{rpm_install_dir}
 install --directory %{buildroot}%{rpm_install_dir}
-install --directory %{config_dir}
+install --directory %{buildroot}%{config_dir}
 install --mode 755 ../setup.py %{buildroot}%{rpm_install_dir}/
 install --mode 755 SRM-probe  %{buildroot}%{rpm_install_dir}/
 install -d --mode 755 gridmetrics %{buildroot}%{rpm_install_dir}/gridmetrics
