@@ -60,7 +60,7 @@ rm -rf %{rpm_install_dir}/gridmetrics
 %files
 %defattr(-,root,root,-)
 %{rpm_install_dir}/SRM-probe
-%{rpm_install_dir}/setup.py
+%{rpm_install_dir}/setup.py*
 %{rpm_install_dir}/gridmetrics
 %{pylib}/*.py*
 
