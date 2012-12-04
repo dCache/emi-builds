@@ -16,7 +16,7 @@ Group: Network/Monitoring
 Source0: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: python >= 2.4
-Requires: python-GridMon >= 1.1.10
+#Requires: python-GridMon >= 1.1.10
 Requires: lcg-util-python
 Requires: gfal-python
 Requires: lcg-util
