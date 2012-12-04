@@ -17,9 +17,9 @@ Source0: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: python >= 2.4
 Requires: python-GridMon >= 1.1.10
-Requires: lcg-util-python.x86_64
-Requires: gfal-python.x86_64
-Requires: lcg-util.x86_64
+Requires: lcg-util-python
+Requires: gfal-python
+Requires: lcg-util
 BuildArch: noarch
 BuildRequires: python >= 2.4
 
