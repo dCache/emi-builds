@@ -28,7 +28,12 @@ javac -version
 mvn -version
 
 export age=$age
-rm -rf ${WORKSPACE}/*;
+
+if [ -d "${WORKSPACE}/dcache-srmclient-${TAG}" ] 
+  then
+    rm -rf ${WORKSPACE}/dcache-srmclient-${TAG};
+fi
+
 svn co ${REPOSITORY}/tags/${TAG} ${WORKSPACE}/dcache-srmclient-${TAG};
 
 cd ${WORKSPACE}
