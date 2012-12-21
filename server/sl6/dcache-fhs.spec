@@ -14,7 +14,7 @@ BuildRoot: %{_builddir}/%{name}-root
 Obsoletes: dCacheConfigure
 Provides: dCachePostInstallConfigurationScripts
 Provides: dcache-server
-BuildRequires: maven2
+BuildRequires: maven
 BuildRequires: java-1.6.0-openjdk-devel 
 
 Requires: nfs-utils
