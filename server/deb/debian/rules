@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+install_package_data:
+	dh_installinit --no-start
+	dh_installlogrotate
+	dh_bash-completion
+
+override_dh_auto_install:
+	mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
+	mvn -B -am -pl modules/fhs package -Dmaven.repo.local=/tmp/.m2/localRepo -DskipTests
+	cp -rf  modules/fhs/target/dcache-fhs-2.2.4/* debian/dcache-server/ 
+
+override_dh_auto_clean:
+	mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
+
+override_dh_auto_build:
+	echo "Skip Autobuild"
+
+install: install_package_data

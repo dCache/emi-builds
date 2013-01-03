@@ -1,0 +1,18 @@
+Source: dcache-server
+Section: misc
+Priority: extra
+Maintainer: Christian Bernardt <christian.bernardt@desy.de>
+Build-Depends: debhelper (>= 7), quilt (>= 0.46-7), gzip
+Standards-Version: 3.9.0
+
+Package: dcache-server
+Depends: ssh-client, adduser, ssl-cert, ${shlibs:Depends}, ${misc:Depends}
+Recommends: libxml2-utils
+Architecture: all
+Suggests: ruby
+Description: distributed mass storage system
+ dCache is an efficient, modular and configurable mass storage
+ management system. It provides a system for storing and retrieving
+ huge amounts of data, distributed among a large number of heterogenous server
+ nodes, under a single virtual filesystem tree with a variety of standard
+ access methods.

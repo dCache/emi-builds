@@ -1,0 +1,5 @@
+dcache-server (2.2.4-2) UNRELEASED; urgency=low
+
+  * Initial release. 
+
+ -- Christian Bernardt <christian.bernardt@desy.de>  Thu, 01 Nov 2012 15:41:43 +0100
