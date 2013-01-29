@@ -1,0 +1,110 @@
+#!/bin/bash
+#
+# Init file for hudson server daemon
+#
+# chkconfig: 2345 65 15
+# description: Hudson slave
+
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+[ -f /etc/sysconfig/network ] && . /etc/sysconfig/network
+
+# Check that networking is up.
+[ "${NETWORKING}" = "no" ] && exit 0
+
+[ -f /etc/hudson-slave.conf ] && . /etc/hudson-slave.conf
+
+RETVAL=0
+NODE_NAME="svn.dcache.org"
+JENKINS_HOST=http://svn.dcache.org/build
+USER=testuser100
+JENKINS_LABLES=xen-emi-wn
+JENKINS_ROOT=/home/${USER}/.jenkins
+JENKINS_OUT=/var/log/jenkins
+JENKINS_ERR=/var/log/jenkins.err
+JENKINS_SWARM_JAR=/home/${USER}/swarm-client-1.8-jar-with-dependencies.jar
+JENKINS_SYS_USER=<please fill in>
+JENKINS_SYS_PASS=<please fill in>
+
+#  Work-around to force bash to read ~/.bash_profile.  This is needed
+#  so that any adjustment to the PATH in .bash_rc is honoured.
+export BASH_ENV=/home/${HUDSON_USER}/.bash_profile
+
+pid_of_hudson() {
+   ps auxwww | grep java | grep -v grep | awk '{ print $2 }'
+}
+
+start() {
+  if [ ! -e /var/log/hudson ]; then
+    touch ${JENKINS_OUT}
+    chown $USER ${JENKINS_OUT}
+  fi
+  if [ ! -e /var/log/hudson.err ]; then
+    touch ${JENKINS_ERR} 
+    chown $USER ${JENKINS_ERR}
+  fi
+        echo -n $"Starting jenkins: "
+        daemon --user ${USER} "java -jar ${JENKINS_SWARM_JAR} -master ${JENKINS_HOST} \
+                -fsroot ${JENKINS_ROOT} \
+                -name `hostname` -labels \"${JENKINS_LABLES}\" 2>${JENKINS_ERR} > ${JENKINS_OUT} \
+                -username ${JENKINS_SYS_USER} \
+                -password ${JENKINS_SYS_PASS} \
+                &"
+
+        sleep 1
+        pid_of_hudson > /dev/null
+        RETVAL=$?
+        [ $RETVAL = 0 ] && success || failure
+        echo
+}
+
+stop() {
+        echo -n "Stopping jenkins slave: "
+        pid=`pid_of_hudson`
+        [ -n "$pid" ] && kill $pid
+        RETVAL=$?
+        cnt=10
+        while [ $RETVAL = 0 -a $cnt -gt 0 ] &&
+                { pid_of_hudson > /dev/null ; } ; do
+                        sleep 1
+                ((cnt--))
+        done
+
+        [ $RETVAL = 0 ] && success || failure
+        echo
+}
+
+
+status() {
+        pid=`pid_of_hudson`
+        if [ -n "$pid" ]; then
+                echo "hudson (pid $pid) is running..."
+                return 0
+        fi
+        echo "hudson is stopped"
+        return 3
+}
+
+
+#Switch on called
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 (start|stop|restart|status}"
+        exit 1
+esac
+
+exit $RETVAL
