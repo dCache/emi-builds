@@ -5,6 +5,12 @@ To use the here provided script:
 
      http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/
 
+    Save the jar to some path and provide the script with the path by setting this variable:
+
+     JENKINS_SWARM_JAR
+
+    ... as can be seen in step 3 below.
+
 3.) Adjust some of the parameters in the file to your needs:
 
      NODE_NAME="svn.dcache.org"
