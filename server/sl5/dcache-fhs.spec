@@ -196,20 +196,30 @@ fi
 /usr/bin/chimera-cli
 /usr/bin/dcache
 /usr/sbin/dcache-info-provider
-/usr/share/doc/dcache-server
+/usr/share/doc/dcache
 /usr/share/dcache
-/usr/share/man/man8/dcache-bootloader.8.gz
-/usr/share/man/man8/dcache.8.gz
+/usr/share/man/man8/dcache-bootloader.8
+/usr/share/man/man8/dcache.8
 /var/log/dcache
+
+%attr(-,dcache,dcache) /var/lib/dcache/alarms
+%attr(-,dcache,dcache) /var/lib/dcache/config
+%attr(-,dcache,dcache) /var/lib/dcache/billing
+%attr(-,dcache,dcache) /var/lib/dcache/plots
+%attr(-,dcache,dcache) /var/lib/dcache/statistics
+%attr(700,dcache,dcache) /var/lib/dcache/credentials
+
 %attr(0755,root,root) /etc/rc.d/init.d/dcache-server
 %attr(0755,root,root) /etc/bash_completion.d/dcache
-%docdir /usr/share/doc/dcache-server
+%docdir /usr/share/doc/dcache
 %config(noreplace) /etc/dcache
 %config(noreplace) /var/lib/dcache
 
 
 
 %changelog
+* Thu Jan 31 2013 Christian Bernardt dCache <christian.bernardt@desy.de> 2.5.0-1
+- Update spec file in accordance with upstream file
 * Tue Jun 26 2012 Christian Bernardt dCache <christian.bernardt@desy.de> 2.2.2-1
 - Adapting changes of current dCache build from tag 2.2.2
 * Fri Mar 2 2012 Christian Bernardt dCache <christian.bernardt@desy.de> 2.1.0-1
