@@ -1,4 +1,12 @@
-To use the here provided script:
+If you want to conenct a jenkins swarm client very quickly just execute the following line assuming 
+the swarm client jar can be found under /home/jenkins/ ( That you downloaded from :
+http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/ )
+
+(you have to replace the place holders with the appropriate values, ask for name and passwd)
+java -jar /home/jenkins/swarm-client-1.8-jar-with-dependencies.jar -master http://svn.dcache.org/build -fsroot <someDirectory> -name <client FQAN> -labels <label-name> -username <name> -password <passwd>
+
+
+To use the here provided script follow this:
 
 1.) Put the jenkins-swarm-connect into /etc/init.d/
 2.) Get the most up-to-date swarm client jar that includes dependencies from:
