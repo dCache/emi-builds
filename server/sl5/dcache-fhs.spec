@@ -198,8 +198,8 @@ fi
 /usr/sbin/dcache-info-provider
 /usr/share/doc/dcache
 /usr/share/dcache
-/usr/share/man/man8/dcache-bootloader.8
-/usr/share/man/man8/dcache.8
+/usr/share/man/man8/dcache-bootloader.8.gz
+/usr/share/man/man8/dcache.8.gz
 /var/log/dcache
 
 %attr(-,dcache,dcache) /var/lib/dcache/alarms
