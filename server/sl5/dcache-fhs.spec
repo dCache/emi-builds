@@ -98,8 +98,8 @@ fi
 /usr/sbin/dcache-info-provider
 /usr/share/doc/dcache-server
 /usr/share/dcache
-/usr/share/man/man8/dcache-bootloader.8
-/usr/share/man/man8/dcache.8
+/usr/share/man/man8/dcache-bootloader.8.gz
+/usr/share/man/man8/dcache.8.gz 
 /var/log/dcache
 %attr(0755,root,root) /etc/rc.d/init.d/dcache-server
 %attr(0755,root,root) /etc/bash_completion.d/dcache
