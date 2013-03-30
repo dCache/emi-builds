@@ -10,7 +10,7 @@ install_package_data:
 override_dh_auto_install:
 	/usr/bin/mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
 	/usr/bin/mvn -B -am -pl modules/fhs package -Dmaven.repo.local=/tmp/.m2/localRepo -DskipTests
-	cp -rf  modules/fhs/target/dcache-fhs-2.5.0/* debian/dcache-server/ 
+	cp -rf  modules/fhs/target/dcache-fhs-2.2.9/* debian/dcache-server/ 
 
 override_dh_auto_clean:
 	/usr/bin/mvn clean -Dmaven.repo.local=/tmp/.m2/localRepository
