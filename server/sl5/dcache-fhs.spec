@@ -12,6 +12,9 @@ Provides: dCachePostInstallConfigurationScripts
 Provides: dcache-server
 AutoReqProv: no
 BuildRequires: java-1.7.0-openjdk.x86_64
+BuildRequires: maven3
+
+Requires: nfs-utils 
 Requires(pre): shadow-utils
 Requires(post): chkconfig
 Requires(preun): chkconfig
