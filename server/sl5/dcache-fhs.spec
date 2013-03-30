@@ -1,8 +1,8 @@
 Summary: dCache Server
 Vendor: dCache.org
-Name: dcache
-Version: @Version@
-Release: @Release@
+Name: dcache-server
+Version: 2.2.9
+Release: 1
 BuildArch: noarch
 Prefix: /
 Packager: dCache.org <support@dcache.org>.
@@ -11,6 +11,7 @@ Obsoletes: dCacheConfigure
 Provides: dCachePostInstallConfigurationScripts
 Provides: dcache-server
 AutoReqProv: no
+BuildRequires: java-1.7.0-openjdk.x86_64
 Requires(pre): shadow-utils
 Requires(post): chkconfig
 Requires(preun): chkconfig
