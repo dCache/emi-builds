@@ -23,7 +23,7 @@ To use the here provided script follow this:
      NODE_NAME="svn.dcache.org"
      JENKINS_HOST=http://svn.dcache.org/build
      USER=jenkins
-     JENKINS_LABLES=xen-emi-wn
+     JENKINS_LABLES=<label>
      JENKINS_ROOT=/home/${USER}/.jenkins
      JENKINS_OUT=/var/log/jenkins
      JENKINS_ERR=/var/log/jenkins.err
@@ -31,7 +31,8 @@ To use the here provided script follow this:
      JENKINS_SYS_USER=<please fill in>
      JENKINS_SYS_PASS=<please fill in>
 
-    Ask someone of the dCache team what is the JENKINS_SYS_USER and JENKINS_SYS_PASS to fill into the file.
+    Do not forget to set the JENKINS_LABLES according to your needs. Ask someone of the dCache team what is the 
+    JENKINS_SYS_USER and JENKINS_SYS_PASS to fill into the file.
 
 5.) execute: /etc/init.d/jenkins-swarm-connect start
 6.) To make the jenkins client reconnect after reboot of your machine execute: chkconfig jenkins-swarm-connect on
