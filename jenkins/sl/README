@@ -9,21 +9,20 @@ java -jar /home/jenkins/swarm-client-1.8-jar-with-dependencies.jar -master http:
 To use the here provided script follow this:
 
 1.) Put the jenkins-swarm-connect into /etc/init.d/
-2.) Get the most up-to-date swarm client jar that includes dependencies from:
+2.) Create the jenkins user: useradd jenkins
+3.) Get the most up-to-date swarm client jar that includes dependencies from:
 
      http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/
 
     Save the jar to some path and provide the script with the path by setting this variable:
 
-     JENKINS_SWARM_JAR
+     JENKINS_SWARM_JAR=/home/${USER}/swarm-client-1.<????>-jar-with-dependencies.jar
 
-    ... as can be seen in step 3 below.
-
-3.) Adjust some of the parameters in the file to your needs:
+4.) Adjust some of the parameters in the file to your needs:
 
      NODE_NAME="svn.dcache.org"
      JENKINS_HOST=http://svn.dcache.org/build
-     USER=testuser100
+     USER=jenkins
      JENKINS_LABLES=xen-emi-wn
      JENKINS_ROOT=/home/${USER}/.jenkins
      JENKINS_OUT=/var/log/jenkins
@@ -34,6 +33,6 @@ To use the here provided script follow this:
 
     Ask someone of the dCache team what is the JENKINS_SYS_USER and JENKINS_SYS_PASS to fill into the file.
 
-3.) execute: /etc/init.d/jenkins-swarm-connect start
-4.) To make the jenkins client reconnect after reboot of your machine execute: chkconfig jenkins-swarm-connect on
-5.) chkconfig --list jenkins-swarm-connect #should show you that the service will now be activated at the appropriate run level
+5.) execute: /etc/init.d/jenkins-swarm-connect start
+6.) To make the jenkins client reconnect after reboot of your machine execute: chkconfig jenkins-swarm-connect on
+7.) chkconfig --list jenkins-swarm-connect #should show you that the service will now be activated at the appropriate run level
