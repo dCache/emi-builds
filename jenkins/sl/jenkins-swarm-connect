@@ -32,7 +32,7 @@ JENKINS_SYS_PASS=<please fill in>
 export BASH_ENV=/home/${HUDSON_USER}/.bash_profile
 
 pid_of_hudson() {
-   ps auxwww | grep java | grep -v grep | awk '{ print $2 }'
+   ps auxwww | grep java | grep -v grep | grep .jenkins | awk '{ print $2 }'
 }
 
 start() {
