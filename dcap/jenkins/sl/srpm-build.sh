@@ -2,7 +2,11 @@ echo "Building package ${packaging} of ${REPOSITORY}/tags/${TAG}"
 echo "Workspace at: ${WORKSPACE}"
 
 export age=$age
-svn co ${REPOSITORY}/tags/${TAG} ${WORKSPACE}/${TAG};
+git clone https://github.com/dCache/dcap.git ${WORKSPACE}/${TAG};
+git checkout ${TAG};
+
+# old checkout with SVN
+# svn co ${REPOSITORY}/tags/${TAG} ${WORKSPACE}/${TAG};
 
 cd ${WORKSPACE}/${TAG}
 ######
