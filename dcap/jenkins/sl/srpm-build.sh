@@ -3,6 +3,7 @@ echo "Workspace at: ${WORKSPACE}"
 
 export age=$age
 git clone https://github.com/dCache/dcap.git ${WORKSPACE}/${TAG};
+cd ${WORKSPACE}/${TAG};
 git checkout ${TAG};
 
 # old checkout with SVN
