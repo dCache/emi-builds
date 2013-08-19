@@ -2,6 +2,7 @@ echo "Building package ${packaging} of ${REPOSITORY}/tags/${TAG}"
 echo "Workspace at: ${WORKSPACE}"
 
 export age=$age
+rm -rf ${WORKSPACE}/${TAG}
 git clone https://github.com/dCache/dcap.git ${WORKSPACE}/${TAG};
 cd ${WORKSPACE}/${TAG};
 git checkout ${TAG};
@@ -9,7 +10,6 @@ git checkout ${TAG};
 # old checkout with SVN
 # svn co ${REPOSITORY}/tags/${TAG} ${WORKSPACE}/${TAG};
 
-cd ${WORKSPACE}/${TAG}
 ######
 # This part needs to be taken out as soon as everything is committed to the repo and in some tag and released.
 ######
@@ -22,9 +22,7 @@ cd -
 
 cp ${WORKSPACE}/${TAG}.src.tar.gz /usr/src/redhat/SOURCES/;
 
-### This only works as long as dcap svn tags are in the form e.g.dcap-2.47.7 not including the age
-
-export VERSION=`echo ${TAG} | awk -F"-" '{print $2}'`
+export VERSION=`echo ${TAG}`
 
 # SL5 and SL6 spec files are the same. If this changes, this is the place to differentiate between both
 
