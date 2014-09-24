@@ -686,10 +686,16 @@ class SRMMetrics(probe.MetricGatherer) :
             self.printd(qres[2])
             return (sts, qres[1])
 
+        protoBlacklist = ['webdav']
+
         protos = []
         for e in qres:
-            if e[1]['GlueSEAccessProtocolType'][0] not in protos:
-                protos.append(e[1]['GlueSEAccessProtocolType'][0])
+            proto = e[1]['GlueSEAccessProtocolType'][0]
+            if (proto not in protoBlacklist) and (proto not in protos):
+                protos.append(proto)
+
+#            if e[1]['GlueSEAccessProtocolType'][0] not in protos:
+#                protos.append(e[1]['GlueSEAccessProtocolType'][0])
 
         if not protos:
             return ('WARNING', "No access protocol types for %s published in %s" % \
