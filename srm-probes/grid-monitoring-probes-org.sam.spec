@@ -8,7 +8,7 @@
 
 Summary: EMI SRM nagios probes
 Name: emi.dcache.srm-probes
-Version: 1.0.0
+Version: 1.0.1
 Release: 1%{?dist}
 
 License: ASL 2.0

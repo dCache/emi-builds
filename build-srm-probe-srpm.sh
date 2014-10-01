@@ -10,9 +10,10 @@ cd srm-probes
 cp -r src ${moduleName}-${TAG}
 tar -z -c -f ${moduleName}-${TAG}.src.tar.gz ${moduleName}-${TAG} CHANGES README setup.py
 
+mkdir -p /usr/src/redhat/SOURCES
 cp ${moduleName}-${TAG}.src.tar.gz /usr/src/redhat/SOURCES/${moduleName}-${TAG}.tgz
 
-sudo rpmbuild --define '_topdir /usr/src/redhat' -ba grid-monitoring-probes-org.sam.spec
+rpmbuild --define '_topdir /usr/src/redhat' -ba grid-monitoring-probes-org.sam.spec
 
 cp -r /usr/src/redhat/* .
 
@@ -32,5 +33,5 @@ case "$osMajorRel" in
 esac
 
 rpm2cpio ${moduleName}-${TAG}-${age}.${osType}noarch.rpm| cpio -id
-tar -czf ${moduleName}-${version}-${age}.${osType}noarch.tar.gz usr
+tar -czf ${moduleName}-${TAG}-${age}.${osType}noarch.tar.gz usr
 
