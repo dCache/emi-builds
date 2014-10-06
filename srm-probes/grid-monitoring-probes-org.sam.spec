@@ -69,5 +69,8 @@ rm -rf %{rpm_install_dir}/gridmetrics
 %doc %{rpm_install_dir}/CHANGES
 
 %changelog
-* Fri Dec 4 2012 Christian Bernardt <christian.bernardt@desy.de> - 1.0.1-1
+* Mon Oct 6 2014 Karsten Schwank <karsten.schwank@desy.de> - 1.0.1-1
+- blacklist webdav, http, https protocols from SRM-GetTURL probe
+* Fri Dec 4 2012 Christian Bernardt <christian.bernardt@desy.de> - 1.0.0-1
 - EMI-3 release that includes dependencies to lcg-util-python, gfal-python, lcg-util
+
