@@ -686,7 +686,7 @@ class SRMMetrics(probe.MetricGatherer) :
             self.printd(qres[2])
             return (sts, qres[1])
 
-        protoBlacklist = ['webdav', 'http', 'https']
+        protoBlacklist = ['webdav', 'http', 'https', 'httpg']
 
         protos = []
         for e in qres:
