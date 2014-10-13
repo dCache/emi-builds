@@ -13,6 +13,10 @@ http://rpm.hellasgrid.gr/mash/centos6-egi-sam/x86_64/
 With older versions one will run into the problem that SL6 standard python is 2.6
 and older python-GridMon packages require python 2.4. 
 
+Another requirement are the lcg-utils that can be found in the epel-6 repo. Just install
+the epel-release-<...>.noarch from the standard SL6 repo. Lcg-util is needed because the 
+probe operations use lcg-cp.
+
 For documentation on probes/metrics please see the following resources:
 
 http://trac.dcache.org/wiki/SrmProbes
