@@ -3,8 +3,15 @@ Probes for (emi) Grid services. To be used with Nagios.
 Grid services covered:
 - SRM
 
-The code is written in Python and uses 'gridmon' Python package, which is
-provided by python-GridMon > v1.1.1 RPM.
+The code is written in Python and uses 'python-GridMon' Python package, which is
+provided by python-GridMon >= v1.1.12 RPM.
+
+The most up-to-date version that was currently available from here:
+
+http://rpm.hellasgrid.gr/mash/centos6-egi-sam/x86_64/
+
+With older versions one will run into the problem that SL6 standard python is 2.6
+and older python-GridMon packages require python 2.4. 
 
 For documentation on probes/metrics please see the following resources:
 
