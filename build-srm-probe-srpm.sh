@@ -1,10 +1,8 @@
 #!/bin/sh
 
-moduleName=emi.dcache.srm-probes
-
-TAG=1.0.1
-
-age=1
+moduleName="$1"
+TAG="$2"
+age="$3"
 
 cd srm-probes
 cp -r src ${moduleName}-${TAG}
